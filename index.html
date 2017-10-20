@@ -27,12 +27,24 @@
             <div class="collapse navbar-collapse" id="siteNavbar">
               <ul class="nav navbar-nav">
                 <!-- TODO: Add appropriate buttons -->
-                <!--
-                <li><button id="new-game" data-user="user" class="btn btn-success navbar-btn hidden">New Game</button></li>
-                <li><button data-toggle="modal" data-target="#join-modal" data-user="user" class="btn btn-info navbar-btn hidden">Join Game</button></li>
-                <li><button id="list-games" data-user="user" class="btn btn-info navbar-btn hidden">Rejoin Games</button></li>
-                <li><button data-toggle="modal" data-target="#invite-modal" data-user="user" id="invite" class="btn btn-info navbar-btn hidden">Invite Player</button></li>
-                -->
+                <li data-user="user" class="hidden">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Lists</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" data-view="new-list" id="nav-new-list">New List</a></li>
+                    <li><a href="#" data-view="index-lists" id="nav-index-lists">Show Lists</a></li>
+                  </ul>
+                </li>
+                <li data-user="user" class="hidden">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Items</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" data-view="new-item" id="nav-new-item">New Items</a></li>
+                    <li><a href="#" data-view="search-items" id="nav-get-item">Search items</a></li>
+                    <li><a href="#" data-view="index-items" id="nav-index-items">List all items</a></li>
+                  </ul>
+                </li>
+                <li data-user="user" class="hidden">
+                  <a href="#" class="dropdown-toggle" data-view="index-purchases" data-toggle="dropdown" id="nav-index-purchases">Purchases</a>
+                </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li data-user="no-user"><a href="#signin-modal" data-toggle="modal" >Sign Up</a></li>

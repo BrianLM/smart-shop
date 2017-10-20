@@ -2,6 +2,7 @@
 const getFormFields = require('../../lib/get-form-fields')
 const authApi = require('./auth/api')
 const authUI = require('./auth/ui')
+const showNewItemTemplate = require('./templates/new-item.handlebars')
 
 const signOutUser = function (event) {
   event.preventDefault()
@@ -40,6 +41,39 @@ const tryCollapse = function () {
   }
 }
 
+const handlebars = function (event) {
+  event.preventDefault()
+  const handleToGet = event.target.attributes['data-view'].value
+  switch (handleToGet) {
+    case 'new-item': {
+      $('#content').empty()
+      const showNewItemHtml = showNewItemTemplate()
+      $('#content').append(showNewItemHtml)
+      break
+    }
+    case 'new-list': {
+      $('#content').empty()
+      break
+    }
+    case 'index-lists': {
+      $('#content').empty()
+      break
+    }
+    case 'search-items': {
+      $('#content').empty()
+      break
+    }
+    case 'index-items': {
+      $('#content').empty()
+      break
+    }
+    case 'index-purchases': {
+      $('#content').empty()
+      break
+    }
+  }
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -49,6 +83,7 @@ const addHandlers = function () {
   $('#change-password-modal').on('hidden.bs.modal', function () {
     $('#changeComment').empty()
   })
+  $('a[data-view]').click('click', handlebars)
 }
 
 module.exports = {
