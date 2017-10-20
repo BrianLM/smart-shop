@@ -1,0 +1,14 @@
+<table class="table table-hover table-responsive">
+  <tr>
+    <th>Item Name</th>
+    <th>Unit of Measure</th>
+    <th>Quantity per unit</th>
+  </tr>
+
+  {{#each items as |item|}}
+  <tr>
+    <td>{{item.name}}</td>
+    <td>{{item.unit}}</td>
+    <td>{{item.unit_quantity}}</td>
+  {{/each}}
+</table>

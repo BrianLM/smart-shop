@@ -7,7 +7,7 @@ const showSearchItemTemplate = require('./templates/search-items.handlebars')
 
 const indexItems = function (data) {
   clearContent()
-  const showNewItemHtml = showIndexItemsTemplate(data)
+  const showNewItemHtml = showIndexItemsTemplate({items: data})
   $('#content').append(showNewItemHtml)
 }
 
