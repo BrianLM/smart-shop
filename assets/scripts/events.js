@@ -7,6 +7,8 @@ const listApi = require('./lists/api.js')
 const listUI = require('./lists/ui.js')
 const itemApi = require('./items/api.js')
 const itemUI = require('./items/ui.js')
+const liApi = require('./list_items/api.js')
+const liUI = require('./list_items/ui.js')
 
 const signOutUser = function (event) {
   event.preventDefault()
@@ -47,14 +49,14 @@ const tryCollapse = function () {
 
 const navHandler = function (event) {
   event.preventDefault()
-  const handleToGet = event.target.attributes['data-view'].value
+  const handleToGet = this.attributes['data-view'].value
   switch (handleToGet) {
     case 'new-item': {
       handlebars.newItem()
       break
     }
     case 'new-list': {
-      $('#content').empty()
+      handlebars.newList()
       break
     }
     case 'index-lists': {
@@ -90,19 +92,104 @@ const toggleListActive = function (event) {
 
 const toggleShownLists = function (event) {
   event.preventDefault()
-  switch (event.target.attributes['data-show'].value) {
+  switch (this.attributes['data-show'].value) {
     case 'active': {
       $('#content h3').text('Now showing all lists')
       $('a[data-show]').text('Show active only')
-      event.target.attributes['data-show'].value = 'all'
+      this.attributes['data-show'].value = 'all'
       $('div[data-list]').removeClass('hidden')
       break
     }
     case 'all': {
       $('#content h3').text('Now showing only active lists')
       $('a[data-show]').text('Show all')
-      event.target.attributes['data-show'].value = 'active'
+      this.attributes['data-show'].value = 'active'
       $('div[data-list][data-list="false"]').addClass('hidden')
+      break
+    }
+  }
+}
+
+const createNewList = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  listApi.createList(data)
+    .then(listUI.onCreateSuccess)
+    .catch(listUI.onCreateFailure)
+}
+
+const editList = function (event) {
+  const id = this.attributes['data-listid'].value
+  listApi.getList(id)
+    .then(listUI.onGetSuccess)
+    .catch(listUI.onGetFailure)
+}
+
+const toggleListGroupEdit = function (event) {
+  const parent = $(event.target).parent()
+  const dataNote = event.target.attributes['data-note'].value
+  switch (dataNote) {
+    case 'edit-group': {
+      $('p[data-note="edit-group"]').addClass('hidden')
+      $('input[data-note="edit-group"]').removeClass('hidden')
+      $('a[data-note="edit-group"]').text('Save').attr('data-note', 'save-group')
+      break
+    }
+    case 'save-group': {
+      const baseName = $('input[data-base]').attr('data-base')
+      const saveName = $('input[data-base]').val()
+      $('p[data-note="edit-group"]').removeClass('hidden')
+      $('input[data-note="edit-group"]').addClass('hidden')
+      $('a[data-note="save-group"]').text('Change').attr('data-note', 'edit-group')
+      if (baseName !== saveName) {
+        const data = {'list': { 'name': saveName }}
+        const id = $('#content div[data-id]').attr('data-id')
+        listApi.updateList(id, data)
+          .then(listUI.onUpdateSuccess)
+          .catch(listUI.onUpdateFailure)
+      }
+      break
+    }
+  }
+}
+
+const editListRow = function (event) {
+  const cause = $(event.target).text()
+  const row = $(event.target).attr('data-row')
+  switch (cause) {
+    case 'Edit': {
+      // const parent = $(event.target).parent()
+      const dataNote = event.target.attributes['data-note'].value
+      switch (dataNote) {
+        case 'edit-li': {
+          $('p[data-note="edit-li"]').addClass('hidden')
+          $('input[data-note="edit-li"]').removeClass('hidden')
+          $('a[data-note="edit-li"]').text('Save').attr('data-note', 'save-li')
+          break
+        }
+        case 'save-li': {
+          const baseValue = $('input[data-base]').attr('data-base')
+          const saveValue = $('input[data-base]').val()
+          $('p[data-note="edit-li"]').removeClass('hidden')
+          $('input[data-note="edit-li"]').addClass('hidden')
+          $('a[data-note="save-li"]').text('Change').attr('data-note', 'edit-li')
+          if (baseValue !== saveValue) {
+            // parent.addClass('alert alert-warning')
+            // $('p[data-note="edit-li"]').text(saveName)
+          }
+          break
+        }
+      }
+      break
+    }
+    case 'Save': {
+      break
+    }
+    default: {
+      $('tr[data-row="' + row + '"]').remove()
+      liApi.deleteListItem(row)
+        .then(liUI.onDeleteSuccess)
+        .catch(liUI.onDeleteFailure)
       break
     }
   }
@@ -121,6 +208,10 @@ const addHandlers = function () {
   $('#content').on('click', 'input[data-listitem]', toggleLIPurchased)
   $('#content').on('click', 'input[data-list]', toggleListActive)
   $('#content').on('click', 'a[data-show]', toggleShownLists)
+  $('#content').on('click', 'a[data-note]', toggleListGroupEdit)
+  $('#content').on('click', 'button[data-listid]', editList)
+  $('#content').on('submit', '#new-list-form', createNewList)
+  $('#content').on('click', 'button[data-row]', editListRow)
 }
 
 module.exports = {
