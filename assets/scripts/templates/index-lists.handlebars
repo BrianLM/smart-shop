@@ -1,8 +1,8 @@
 
   {{#each lists as |list|}}
-  <div class="container-fluid {{#if list.active}}{{else}}hidden{{/if}}">
+  <div class="container-fluid {{#if list.active}}{{else}}hidden{{/if}}" data-list="{{list.id}}">
   <table class="table table-responsive table-hover">
-    <caption>List {{list.id}}
+    <caption>List {{list.name}} Active   {{#if list.active}}<input type="checkbox" checked>{{else}}<input type="checkbox">{{/if}}
     <tr>
       <th>Item Name</th>
       <th>Needed</th>
