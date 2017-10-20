@@ -80,6 +80,34 @@ const navHandler = function (event) {
   }
 }
 
+const toggleLIPurchased = function (event) {
+  console.log(event.target.attributes['data-listitem'].value)
+}
+
+const toggleListActive = function (event) {
+  console.log(event.target.attributes['data-list'].value)
+}
+
+const toggleShownLists = function (event) {
+  event.preventDefault()
+  switch (event.target.attributes['data-show'].value) {
+    case 'active': {
+      $('#content h3').text('Now showing all lists')
+      $('a[data-show]').text('Show active only')
+      event.target.attributes['data-show'].value = 'all'
+      $('div[data-list]').removeClass('hidden')
+      break
+    }
+    case 'all': {
+      $('#content h3').text('Now showing only active lists')
+      $('a[data-show]').text('Show all')
+      event.target.attributes['data-show'].value = 'active'
+      $('div[data-list][data-list="false"]').addClass('hidden')
+      break
+    }
+  }
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -90,6 +118,9 @@ const addHandlers = function () {
     $('#changeComment').empty()
   })
   $('a[data-view]').click('click', navHandler)
+  $('#content').on('click', 'input[data-listitem]', toggleLIPurchased)
+  $('#content').on('click', 'input[data-list]', toggleListActive)
+  $('#content').on('click', 'a[data-show]', toggleShownLists)
 }
 
 module.exports = {
