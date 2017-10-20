@@ -12,8 +12,10 @@ const indexItems = function (data) {
 }
 
 const indexLists = function (data) {
+  console.log('Index lists received')
+  console.log(data)
   clearContent()
-  const showNewItemHtml = showIndexListTemplate(data)
+  const showNewItemHtml = showIndexListTemplate({lists: data})
   $('#content').append(showNewItemHtml)
 }
 
