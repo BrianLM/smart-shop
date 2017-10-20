@@ -45,7 +45,7 @@ const clearContent = function () {
   $('#content').empty()
 }
 
-module.export = {
+module.exports = {
   indexLists,
   indexItems,
   indexPurchases,

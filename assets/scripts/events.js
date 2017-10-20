@@ -3,6 +3,8 @@ const getFormFields = require('../../lib/get-form-fields')
 const authApi = require('./auth/api')
 const authUI = require('./auth/ui')
 const handlebars = require('./handlebars.js')
+const listApi = require('./lists/api.js')
+const listUI = require('./lists/ui.js')
 
 const signOutUser = function (event) {
   event.preventDefault()
@@ -54,7 +56,9 @@ const navHandler = function (event) {
       break
     }
     case 'index-lists': {
-      $('#content').empty()
+      listApi.indexLists()
+        .then(listUI.onIndexSuccess)
+        .catch(listUI.onIndexFailure)
       break
     }
     case 'search-items': {
