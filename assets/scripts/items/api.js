@@ -2,9 +2,9 @@
 const config = require('../config')
 const store = require('../store.js')
 
-const indexLists = function () {
+const indexItems = function () {
   return $.ajax({
-    url: config.apiOrigin + '/lists',
+    url: config.apiOrigin + '/items',
     method: 'get',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -13,5 +13,5 @@ const indexLists = function () {
 }
 
 module.exports = {
-  indexLists
+  indexItems
 }
