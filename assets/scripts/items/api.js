@@ -12,6 +12,17 @@ const indexItems = function () {
   })
 }
 
+const onSearchItems = function (data) {
+  return $.ajax({
+    url: config.apiOrigin + '/search_items/' + data,
+    method: 'get',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
-  indexItems
+  indexItems,
+  onSearchItems
 }

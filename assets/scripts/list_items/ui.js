@@ -1,6 +1,6 @@
 'use strict'
-const store = require('../store.js')
-const handlebars = require('../handlebars.js')
+// const store = require('../store.js')
+// const handlebars = require('../handlebars.js')
 const listsApi = require('../lists/api.js')
 const listsUi = require('../lists/ui.js')
 

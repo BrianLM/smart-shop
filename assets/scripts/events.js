@@ -66,7 +66,7 @@ const navHandler = function (event) {
       break
     }
     case 'search-items': {
-      $('#content').empty()
+      handlebars.searchItems()
       break
     }
     case 'index-items': {
@@ -126,7 +126,6 @@ const editList = function (event) {
 }
 
 const toggleListGroupEdit = function (event) {
-  const parent = $(event.target).parent()
   const dataNote = event.target.attributes['data-note'].value
   switch (dataNote) {
     case 'edit-group': {
@@ -221,6 +220,19 @@ const appendItemToList = function (event) {
     .catch(liUI.onCreateFailure)
 }
 
+const searchItems = function (event) {
+  const searchBase = $(event.target).attr('data-search')
+  const searchCriteria = $('input[data-search="' + searchBase + '"]').val()
+  switch (searchBase) {
+    case 'items': {
+      itemApi.onSearchItems(searchCriteria)
+        .then(itemUI.onSearchSuccess)
+        .catch(itemUI.onSearchFailure)
+      break
+    }
+  }
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -241,6 +253,7 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-item]', addItemToList)
   $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
   $('#content').on('click', 'button[data-to]', appendItemToList)
+  $('#content').on('click', 'button[data-search]', searchItems)
 }
 
 module.exports = {
