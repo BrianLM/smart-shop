@@ -6,9 +6,13 @@
   </tr>
 
   {{#each items as |item|}}
-  <tr>
+  <tr data-item="{{item.id}}">
     <td>{{item.name}}</td>
     <td>{{item.unit}}</td>
     <td>{{item.unit_quantity}}</td>
+    <td><button title="Add to a list" data-item="{{item.id}}" class="btn-sm btn-warning">&#43;</button></td>
+  </tr>
+  <tr class="hidden" data-item="{{item.id}}"><td colspan="4" data-item="{{item.id}}"><td>
+  </tr>
   {{/each}}
 </table>

@@ -195,6 +195,32 @@ const editListRow = function (event) {
   }
 }
 
+const addItemToList = function (event) {
+  event.preventDefault()
+  const itemID = $(event.target).attr('data-item')
+  $('tr[data-item="' + itemID + '"]').removeClass('hidden')
+  $('td[data-item="' + itemID + '"]').attr('data-content', 'target')
+  listApi.indexLists()
+    .then(listUI.onListNames)
+    .catch(listUI.onIndexFailure)
+}
+
+const showQuantity = function (event) {
+  const row = $(event.target).attr('data-showedit')
+  $('tr[data-row="' + row + '"] td').removeClass('hidden')
+  $(event.target).removeClass('btn-success').addClass('btn-secondary')
+}
+
+const appendItemToList = function (event) {
+  const listId = $(event.target).attr('data-to')
+  const itemId = $(event.target).closest('table').parent().attr('data-item')
+  const quantity = $(event.target).parent().prev().children('input').val()
+  const data = {'list_item': { 'list_id': listId, 'item_id': itemId, 'purchased': false, 'quantity': quantity }}
+  liApi.onAddItemToList(data)
+    .then(liUI.onCreateSuccess)
+    .catch(liUI.onCreateFailure)
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -212,6 +238,9 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-listid]', editList)
   $('#content').on('submit', '#new-list-form', createNewList)
   $('#content').on('click', 'button[data-row]', editListRow)
+  $('#content').on('click', 'button[data-item]', addItemToList)
+  $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
+  $('#content').on('click', 'button[data-to]', appendItemToList)
 }
 
 module.exports = {

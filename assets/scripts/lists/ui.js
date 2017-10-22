@@ -5,6 +5,11 @@ const handlebars = require('../handlebars.js')
 const onIndexSuccess = function (response, status, xhr) {
   handlebars.indexLists(response.lists)
 }
+
+const onListNames = function (response, status, xhr) {
+  handlebars.partialList(response.lists)
+}
+
 const onIndexFailure = function (response, status, xhr) {
   console.log(`In onIndex failure, response is ${response}`)
   console.log(`In onIndex failure, status is ${status}`)
@@ -49,5 +54,6 @@ module.exports = {
   onGetSuccess,
   onGetFailure,
   onUpdateSuccess,
-  onUpdateFailure
+  onUpdateFailure,
+  onListNames
 }

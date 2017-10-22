@@ -12,6 +12,18 @@ const deleteListItem = function (id) {
   })
 }
 
+const onAddItemToList = function (data) {
+  return $.ajax({
+    url: config.apiOrigin + '/list_items',
+    method: 'post',
+    data: data,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
-  deleteListItem
+  deleteListItem,
+  onAddItemToList
 }

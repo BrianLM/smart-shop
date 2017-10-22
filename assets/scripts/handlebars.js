@@ -5,6 +5,7 @@ const showNewItemTemplate = require('./templates/new-item.handlebars')
 const showNewListTemplate = require('./templates/new-list.handlebars')
 const showSearchItemTemplate = require('./templates/search-items.handlebars')
 const showEditListTemplate = require('./templates/edit-list.handlebars')
+const showListPartialTemplate = require('./templates/list-partial.handlebars')
 
 const indexItems = function (data) {
   clearContent()
@@ -48,6 +49,11 @@ const editList = function (data) {
   $('#content').append(showEditListHtml)
 }
 
+const partialList = function (data) {
+  const showListPartialHtml = showListPartialTemplate({lists: data})
+  $('td[data-content="target"]').append(showListPartialHtml)
+}
+
 const clearContent = function () {
   $('#content').empty()
 }
@@ -59,5 +65,6 @@ module.exports = {
   newItem,
   newList,
   editList,
-  searchItems
+  searchItems,
+  partialList
 }
