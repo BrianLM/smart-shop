@@ -5,15 +5,9 @@ const listsApi = require('../lists/api.js')
 const listsUi = require('../lists/ui.js')
 
 const onDeleteSuccess = function (response, status, xhr) {
-  console.log(`In onDelete success, response is ${response}`)
-  console.log(`In onDelete success, status is ${status}`)
-  console.log(`In onDelete success, xhr is ${xhr}`)
 }
 
 const onDeleteFailure = function (response, status, xhr) {
-  console.log(`In onDelete failure, response is ${response}`)
-  console.log(`In onDelete failure, status is ${status}`)
-  console.log(`In onDelete failure, xhr is ${xhr}`)
 }
 
 const onCreateSuccess = function (response, status, xhr) {
@@ -23,9 +17,6 @@ const onCreateSuccess = function (response, status, xhr) {
 }
 
 const onCreateFailure = function (response, status, xhr) {
-  console.log(`In onCreate failure, response is ${response}`)
-  console.log(`In onCreate failure, status is ${status}`)
-  console.log(`In onCreate failure, xhr is ${xhr}`)
 }
 
 const onUpdateSuccess = function (response, status, xhr) {
@@ -35,9 +26,6 @@ const onUpdateSuccess = function (response, status, xhr) {
 }
 
 const onUpdateFailure = function (response, status, xhr) {
-  console.log(`In onCreate failure, response is ${response}`)
-  console.log(`In onCreate failure, status is ${status}`)
-  console.log(`In onCreate failure, xhr is ${xhr}`)
 }
 
 module.exports = {

@@ -78,7 +78,6 @@ const navHandler = function (event) {
 }
 
 const toggleLIPurchased = function (event) {
-  console.log(event.target.attributes['data-listitem'].value)
   const listitem = $(event.target).attr('data-listitem')
   const data = {'list_item': {'purchased': event.target.checked}}
   liApi.onUpdate(listitem, data)

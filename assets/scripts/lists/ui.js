@@ -11,9 +11,6 @@ const onListNames = function (response, status, xhr) {
 }
 
 const onIndexFailure = function (response, status, xhr) {
-  console.log(`In onIndex failure, response is ${response}`)
-  console.log(`In onIndex failure, status is ${status}`)
-  console.log(`In onIndex failure, xhr is ${xhr}`)
 }
 
 const onGetSuccess = function (response, status, xhr) {
@@ -27,9 +24,6 @@ const onToList = function (response, status, xhr) {
 }
 
 const onGetFailure = function (response, status, xhr) {
-  console.log(`In onGet failure, response is ${response}`)
-  console.log(`In onGet failure, status is ${status}`)
-  console.log(`In onGet failure, xhr is ${xhr}`)
 }
 
 const onCreateSuccess = function (response, status, xhr) {
@@ -39,9 +33,6 @@ const onCreateSuccess = function (response, status, xhr) {
 }
 
 const onCreateFailure = function (response, status, xhr) {
-  console.log(`In onCreate failure, response is ${response}`)
-  console.log(`In onCreate failure, status is ${status}`)
-  console.log(`In onCreate failure, xhr is ${xhr}`)
 }
 
 const onUpdateSuccess = function (response, status, xhr) {
@@ -51,9 +42,6 @@ const onUpdateSuccess = function (response, status, xhr) {
 }
 
 const onUpdateFailure = function (response, status, xhr) {
-  console.log(`In onUpdate failure, response is ${response}`)
-  console.log(`In onUpdate failure, status is ${status}`)
-  console.log(`In onUpdate failure, xhr is ${xhr}`)
 }
 
 module.exports = {
