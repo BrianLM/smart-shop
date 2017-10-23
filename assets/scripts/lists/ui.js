@@ -37,7 +37,7 @@ const onCreateFailure = function (response, status, xhr) {
 }
 
 const onUpdateSuccess = function (response, status, xhr) {
-  $('span[data-id="group-name"]').text(response.list.name)
+  handlebars.editList(response.list)
 }
 
 const onUpdateFailure = function (response, status, xhr) {

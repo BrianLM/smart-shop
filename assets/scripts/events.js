@@ -92,7 +92,15 @@ const toggleLIPurchased = function (event) {
 }
 
 const toggleListActive = function (event) {
-  console.log(event.target.attributes['data-list'].value)
+  const id = $(event.target).attr('data-list')
+  const active = event.target.checked || false
+  updateListActive(id, active)
+}
+
+const updateListActive = function (id, active) {
+  listApi.updateList(id, {'list': {'active': active}})
+    .then(listUI.onUpdateSuccess)
+    .catch(listUI.onUpdateFailure)
 }
 
 const toggleShownLists = function (event) {
@@ -249,6 +257,7 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
   $('#content').on('click', 'button[data-to]', appendItemToList)
   $('#content').on('click', 'button[data-search]', searchItems)
+  $('#content').on('click', 'button[data-list].btn-info', toggleListActive)
 }
 
 module.exports = {

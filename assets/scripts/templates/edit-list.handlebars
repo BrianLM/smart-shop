@@ -10,6 +10,8 @@
       <th>Needed</th>
       <th>Package</th>
       <th>Purchased?</th>
+      <th></th>
+      <th></th>
     </tr>
       {{#each list.list_items as |listItem|}}
       <tr data-listitem="{{listItem.id}}" data-mode="show">
@@ -22,4 +24,7 @@
       </tr>
       {{/each}}
   </table>
+  {{#if list.complete}}{{#if list.active}}<p>This list is complete, would you like to delete it or save it as inactive?</p>
+  <button class="btn btn-danger" data-list="{{list.id}}">Delete</button><button class="btn btn-info" data-list="{{list.id}}">Save</button>
+  {{/if}}<p>Would you like to make a copy of this list?<button class=btn btn-success data-listitem="{{listItem.id}}" data-copy="list">Copy &raquo;</button> {{/if}}
 </div>

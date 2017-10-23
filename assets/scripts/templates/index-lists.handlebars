@@ -9,14 +9,15 @@
       <th>Package</th>
       <th>Purchased?</th>
     </tr>
-      {{#each list.list_items as |listItem|}}
-      <tr>
-        <td>{{listItem.item.name}}</td>
-        <td>{{listItem.quantity}}</td>
-        <td>{{listItem.item.unit_quantity}} {{listItem.item.unit}}</td>
-        <td><input type="checkbox" {{#if listItem.purchased}}checked{{/if}} data-listitem="{{listItem.id}}">
-      </tr>
-      {{/each}}
+    {{#each list.list_items as |listItem|}}
+    <tr>
+      <td>{{listItem.item.name}}</td>
+      <td>{{listItem.quantity}}</td>
+      <td>{{listItem.item.unit_quantity}} {{listItem.item.unit}}</td>
+      <td><input type="checkbox" {{#if listItem.purchased}}checked{{/if}} data-listitem="{{listItem.id}}">
+    </tr>
+    {{/each}}
   </table>
   <button class="btn-sm btn-default" data-listid={{list.id}}>Edit</button>
+</div>
 {{/each}}
