@@ -1,44 +1,39 @@
-# The game
+# The Application
 
-Tic-Tac-Toe is a 3-in-a-row game. Match your token across any row to win.
+Shopping list organizer for making smarter, reusable lists
 
 ## The tech
 
-This SPA page was written with Javascript, jQuery, SCSS, HTML5, and CSS Styling through Bootstrap.
+This SPA page was written with Handlebars Templates, Javascript, jQuery, HTML5, and CSS Styling through Bootstrap.
 
 ## With the user in mind
-- 'As a user I can sign up to log in and store my progress'
-- 'As a user I can give up if I know I will lose.'
-- 'As a user I can log in any time to go back to my game.'
+- 'As a user I can sign up to log in from anywhere to see my lists.'
+- 'As a user I can mark individual items purchased if I cannot get everything in one place.'
+- 'As a user I can see my past lists if I shop for the same things often.'
 - 'As a user I can change my password.'
+- 'As a user I want to know others cannot change my lists.'
 
 ## The planning
 ### The start
-Planning for the game started with the outline of where everything should go. Navbar, game board and styling was put in place to lay the expectations for the backend.
+Planning for the site started with whiteboarding where features would appear, and designing the page with miniumal static content. Handlebars were designed to control each result for cleaner content delivery.
 ### The back end
-Back end development started with user authentication, after all, we can't play if we aren't known. Authentication design redefined our front end to make logins more interactive.
+Back end development started with user authentication. All logins are controlled via modal content. User signup will log the user in as well.
 
-Once logging in was available, creating games began. Game creation through the backend games API showed how to update the board: on response. No way to cheat since the game board is set by the API.
+Once logging in was available, creating lists and items were next. Each of these entities are stand-alone resources, meaning they do not require any other entities, and extend others by their presense.
 
-This API-enforced board update immediately allowed getting old games to reset the board. Once the GET request returned the board, the tiles were reset and the game can continue.
+Using the responses from these entities, the Handlebars templates were created, and duplicated, to ensure content is delivered as needed, removed as not and follows the same theme. Basic templates were created for the other actions, as well as showing list items.
 
-After getting single games was available, getting all games for statistics was made. At the same time, listing still open games was created so you can join any game from the game list modal.
-
-### Multi-Player
-Multiplayer from the Get and Patch API was created, but automatic updates to the board came later. First, the join other game was made, followed by playing the computer. After losing several games to the computer, the watcher funtion was put in place.
-
-With the watcher in place, and the invite to game added, multiplayer against a person was a reality.
+After list items were shown, development was deficit-driven. What is missing, what does not make sense, and what can't the user do with what is available.
 
 ## Future development
-Future desired updates include
-1. An email user link, rather than game ID sharing.
-2. Using the local machine to stay logged in as well as
-  - Custom Icons
-  - Style customizations
-3. Game ready notifications in the page for the games you are still playing and are waiting for you.
+The ERD is configured to handle a great deal more functionality. Additional features would include
+1. Store data storing. Name, location and pricing by items.
+2. Purchase history. Storing what store purchased at, what price it had, how often you purchase it and what the average price has been.
+3. List sharing for organizations, friends and families.
+4. Predictive listing. Based on frequency of purchases.
 
-
-
+## The API.
+The API can be found here, https://github.com/BrianLM/rails-project-api
 
 ## Wireframe
-![Wireframe](https://github.com/BrianLM/tic-tac-toe/blob/master/wireframe/wireframe.001.png)
+![Wireframe](https://github.com/BrianLM/smart-shop/blob/master/wireframe.png)
