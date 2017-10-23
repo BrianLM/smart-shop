@@ -61,9 +61,7 @@ const navHandler = function (event) {
       break
     }
     case 'index-lists': {
-      listApi.indexLists()
-        .then(listUI.onIndexSuccess)
-        .catch(listUI.onIndexFailure)
+      indexLists()
       break
     }
     case 'search-items': {
@@ -75,6 +73,12 @@ const navHandler = function (event) {
       break
     }
   }
+}
+
+const indexLists = function () {
+  listApi.indexLists()
+    .then(listUI.onIndexSuccess)
+    .catch(listUI.onIndexFailure)
 }
 
 const toggleLIPurchased = function (event) {
@@ -261,6 +265,12 @@ const newToList = function (event) {
   handlebars.newItem()
 }
 
+const deleteList = function (event) {
+  const id = $(event.target).attr('data-list')
+  listApi.deleteList(id)
+    .then(indexLists)
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -283,7 +293,8 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
   $('#content').on('click', 'button[data-to]', appendItemToList)
   $('#content').on('click', 'button[data-search]', searchItems)
-  $('#content').on('click', 'button[data-list].btn-info', toggleListActive)
+  $('#content').on('click', 'button[data-save-list]', toggleListActive)
+  $('#content').on('click', 'button[data-delete-list]', deleteList)
   $('#content').on('click', 'button[data-item-index]', onIndexItems)
   $('#content').on('click', 'button[data-add-search]', searchToList)
   $('#content').on('click', 'button[data-add-new]', newToList)

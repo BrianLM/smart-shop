@@ -68,7 +68,7 @@
     {{#if list.complete}}
       {{#if list.active}}
         <p>This list is complete, would you like to delete it or save it as inactive?</p>
-        <button class="btn btn-danger" data-list="{{list.id}}">Delete</button><button class="btn btn-info" data-list="{{list.id}}">Save</button>
+        <button data-delete-list class="btn btn-danger" data-list="{{list.id}}">Delete</button><button data-save-list class="btn btn-info" data-list="{{list.id}}">Save</button>
       {{/if}}
     {{/if}}
   {{/if}}

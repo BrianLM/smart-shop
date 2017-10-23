@@ -22,6 +22,16 @@ const getList = function (id) {
   })
 }
 
+const deleteList = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/lists/' + id,
+    method: 'delete',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const createList = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/lists',
@@ -48,5 +58,6 @@ module.exports = {
   indexLists,
   getList,
   createList,
-  updateList
+  updateList,
+  deleteList
 }
