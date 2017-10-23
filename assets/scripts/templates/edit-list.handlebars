@@ -3,7 +3,7 @@
   <div>
     <p data-note="edit-group">Current list name: <span data-id="group-name">{{list.name}}</span>.</p> <input data-base="{{list.name}}" data-note="edit-group" class="hidden" type="text" name="list[name]" value="{{list.name}}"> <a href="#" data-note="edit-group">Change</a>
   </div>
-  <table class="table table-responsive table-hover">
+  <table class="table table-responsive table-hover" data-list="{{list.id}}">
     <caption>List {{list.name}} Active   <input type="checkbox" {{#if list.active}}checked{{/if}} data-list="{{list.id}}">
     <tr>
       <th>Item Name</th>
@@ -12,13 +12,13 @@
       <th>Purchased?</th>
     </tr>
       {{#each list.list_items as |listItem|}}
-      <tr data-row="{{listItem.id}}" data-mode="show">
+      <tr data-listitem="{{listItem.id}}" data-mode="show">
         <td>{{listItem.item.name}}</td>
-        <td><p data-note="edit-li">{{listItem.quantity}}</p><input data-base="{{listItem.quantity}}" data-note="edit-li" class="hidden" type="number" name="list_item[quantity]" value="{{listItem.quantity}}"> </td>
+        <td><p data-note="edit-li">{{listItem.quantity}}</p><input data-listitem="{{listItem.id}}" data-note="edit-li" class="hidden" type="number" name="list_item[quantity]" value="{{listItem.quantity}}"> </td>
         <td>{{listItem.item.unit_quantity}} {{listItem.item.unit}}</td>
-        <td><input type="checkbox" {{#if listitem.purchased}}checked{{/if}} data-listitem="{{listItem.id}}"></td>
-        <td><button data-note="edit-li" data-row="{{listItem.id}}" class="btn-sm btn-warning">Edit</button>
-        <td><button data-row="{{listItem.id}}" class="btn-sm btn-danger">&times;</button>
+        <td><input type="checkbox" {{#if listItem.purchased}}checked{{/if}} data-listitem="{{listItem.id}}"></td>
+        <td><button data-note="edit-li" data-listitem="{{listItem.id}}" data-item="{{listItem.item.id}}" class="btn-sm btn-warning">Edit</button>
+        <td><button data-note="edit-li" data-listitem="{{listItem.id}}" class="btn-sm btn-danger">&times;</button>
       </tr>
       {{/each}}
   </table>

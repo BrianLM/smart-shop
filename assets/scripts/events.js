@@ -84,6 +84,11 @@ const navHandler = function (event) {
 
 const toggleLIPurchased = function (event) {
   console.log(event.target.attributes['data-listitem'].value)
+  const listitem = $(event.target).attr('data-listitem')
+  const data = {'list_item': {'purchased': event.target.checked}}
+  liApi.onUpdate(listitem, data)
+    .then(liUI.onUpdateSuccess)
+    .catch(liUI.onUpdateFailure)
 }
 
 const toggleListActive = function (event) {
@@ -154,39 +159,29 @@ const toggleListGroupEdit = function (event) {
 
 const editListRow = function (event) {
   const cause = $(event.target).text()
-  const row = $(event.target).attr('data-row')
+  const listitem = $(event.target).attr('data-listitem')
+  const itemId = $(event.target).attr('data-item')
+  const listId = $(event.target).closest('table').attr('data-list')
   switch (cause) {
     case 'Edit': {
-      // const parent = $(event.target).parent()
-      const dataNote = event.target.attributes['data-note'].value
-      switch (dataNote) {
-        case 'edit-li': {
-          $('p[data-note="edit-li"]').addClass('hidden')
-          $('input[data-note="edit-li"]').removeClass('hidden')
-          $('a[data-note="edit-li"]').text('Save').attr('data-note', 'save-li')
-          break
-        }
-        case 'save-li': {
-          const baseValue = $('input[data-base]').attr('data-base')
-          const saveValue = $('input[data-base]').val()
-          $('p[data-note="edit-li"]').removeClass('hidden')
-          $('input[data-note="edit-li"]').addClass('hidden')
-          $('a[data-note="save-li"]').text('Change').attr('data-note', 'edit-li')
-          if (baseValue !== saveValue) {
-            // parent.addClass('alert alert-warning')
-            // $('p[data-note="edit-li"]').text(saveName)
-          }
-          break
-        }
-      }
+      $('p[data-note="edit-li"][data-listitem="' + listitem + '"]').addClass('hidden')
+      $('input[data-note="edit-li"][data-listitem="' + listitem + '"]').removeClass('hidden')
+      $('a[data-note="edit-li"][data-listitem="' + listitem + '"]').text('Save').attr('data-note', 'save-li')
+      $(event.target).removeClass('btn-warning').addClass('btn-success')
+      $(event.target).text('Save')
       break
     }
     case 'Save': {
+      const saveValue = $('input[data-note="edit-li"][data-listitem="' + listitem + '"]').val()
+      const data = {'list_item': { 'list_id': listId, 'item_id': itemId, 'purchased': false, 'quantity': saveValue }}
+      liApi.onUpdate(listitem, data)
+        .then(liUI.onUpdateSuccess)
+        .catch(liUI.onUpdateFailure)
       break
     }
     default: {
-      $('tr[data-row="' + row + '"]').remove()
-      liApi.deleteListItem(row)
+      $('tr[data-listitem="' + listitem + '"]').remove()
+      liApi.deleteListItem(listitem)
         .then(liUI.onDeleteSuccess)
         .catch(liUI.onDeleteFailure)
       break
@@ -249,7 +244,7 @@ const addHandlers = function () {
   $('#content').on('click', 'a[data-note]', toggleListGroupEdit)
   $('#content').on('click', 'button[data-listid]', editList)
   $('#content').on('submit', '#new-list-form', createNewList)
-  $('#content').on('click', 'button[data-row]', editListRow)
+  $('#content').on('click', 'button[data-note="edit-li"]', editListRow)
   $('#content').on('click', 'button[data-item]', addItemToList)
   $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
   $('#content').on('click', 'button[data-to]', appendItemToList)

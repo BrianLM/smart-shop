@@ -28,9 +28,23 @@ const onCreateFailure = function (response, status, xhr) {
   console.log(`In onCreate failure, xhr is ${xhr}`)
 }
 
+const onUpdateSuccess = function (response, status, xhr) {
+  listsApi.getList(response.list_item.list.id)
+    .then(listsUi.onGetSuccess)
+    .catch(listsUi.onGetFailure)
+}
+
+const onUpdateFailure = function (response, status, xhr) {
+  console.log(`In onCreate failure, response is ${response}`)
+  console.log(`In onCreate failure, status is ${status}`)
+  console.log(`In onCreate failure, xhr is ${xhr}`)
+}
+
 module.exports = {
   onDeleteSuccess,
   onDeleteFailure,
   onCreateSuccess,
-  onCreateFailure
+  onCreateFailure,
+  onUpdateSuccess,
+  onUpdateFailure
 }

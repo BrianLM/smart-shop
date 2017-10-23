@@ -23,7 +23,19 @@ const onAddItemToList = function (data) {
   })
 }
 
+const onUpdate = function (id, data) {
+  return $.ajax({
+    url: config.apiOrigin + '/list_items/' + id,
+    method: 'patch',
+    data: data,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   deleteListItem,
-  onAddItemToList
+  onAddItemToList,
+  onUpdate
 }
