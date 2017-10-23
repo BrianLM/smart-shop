@@ -1,10 +1,20 @@
 <table class="table table-hover table-responsive">
-{{#each lists as |list|}}
-<tr data-row="{{list.id}}">
-  <td>{{list.name}}</td>
-  <td class="hidden" data-list="item">How many? <input type="number" placeholder="Needed"></td>
-  <td class="hidden" data-list="item"><button data-to="{{list.id}}" class="btn-sm btn btn-success">&#43;</button></td>
-  <td><button data-showedit="{{list.id}}" class="btn-sm btn btn-success" title="This list" data-function="quantity">&#10004;</button></td>
-</tr>
-{{/each}}
+  {{#each lists as |list|}}
+    <tr data-row="{{list.id}}" >
+      <td>
+        {{list.name}}
+      </td>
+      <td class="hidden" data-list="item">
+        How many? <input type="number" placeholder="Needed">
+      </td>
+      <td class="hidden" data-list="item">
+        <button data-to="{{list.id}}" class="btn-sm btn btn-success">&#43;
+        </button>
+      </td>
+      <td>
+        <button data-showedit="{{list.id}}" class="btn-sm btn btn-success" title="This list" data-function="quantity">&#10004;
+        </button>
+      </td>
+    </tr>
+  {{/each}}
 </table>

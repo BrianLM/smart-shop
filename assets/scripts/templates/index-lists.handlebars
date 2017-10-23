@@ -1,23 +1,41 @@
-<h3>Now showing only active lists.</h3><a href="#" data-show="active">Show all</a>
-  {{#each lists as |list|}}
+<h3>Now showing only active lists.</h3>
+<a href="#" data-show="active">Show all</a>
+{{#each lists as |list|}}
   <div class="container-fluid {{#if list.active}}{{else}}hidden{{/if}}" data-list="{{#if list.active}}true{{else}}false{{/if}}">
   <table class="table table-responsive table-hover">
     <caption>List {{list.name}} Active   <input type="checkbox" {{#if list.active}}checked{{/if}} data-list="{{list.id}}">
     <tr>
-      <th>Item Name</th>
-      <th>Needed</th>
-      <th>Package</th>
-      <th>Purchased?</th>
+      <th>
+        Item Name
+      </th>
+      <th>
+        Needed
+      </th>
+      <th>
+        Package
+      </th>
+      <th>
+        Purchased?
+      </th>
     </tr>
     {{#each list.list_items as |listItem|}}
-    <tr>
-      <td>{{listItem.item.name}}</td>
-      <td>{{listItem.quantity}}</td>
-      <td>{{listItem.item.unit_quantity}} {{listItem.item.unit}}</td>
-      <td><input type="checkbox" {{#if listItem.purchased}}checked{{/if}} data-listitem="{{listItem.id}}">
-    </tr>
+      <tr>
+        <td>
+          {{listItem.item.name}}
+        </td>
+        <td>
+          {{listItem.quantity}}
+        </td>
+        <td>
+          {{listItem.item.unit_quantity}} {{listItem.item.unit}}
+        </td>
+        <td>
+          <input type="checkbox" {{#if listItem.purchased}}checked{{/if}} data-listitem="{{listItem.id}}">
+        </td>
+      </tr>
     {{/each}}
   </table>
-  <button class="btn-sm btn-default" data-listid={{list.id}}>Edit</button>
+  <button class="btn-sm btn-default" data-listid={{list.id}}>Edit
+  </button>
 </div>
 {{/each}}

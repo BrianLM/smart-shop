@@ -3,6 +3,7 @@ const getFormFields = require('../../lib/get-form-fields')
 const authApi = require('./auth/api')
 const authUI = require('./auth/ui')
 const handlebars = require('./handlebars.js')
+const store = require('./store.js')
 const listApi = require('./lists/api.js')
 const listUI = require('./lists/ui.js')
 const itemApi = require('./items/api.js')
@@ -70,13 +71,7 @@ const navHandler = function (event) {
       break
     }
     case 'index-items': {
-      itemApi.indexItems()
-        .then(itemUI.onIndexSuccess)
-        .catch(itemUI.onIndexFailure)
-      break
-    }
-    case 'index-purchases': {
-      $('#content').empty()
+      onIndexItems(event)
       break
     }
   }
@@ -129,6 +124,14 @@ const createNewList = function (event) {
   listApi.createList(data)
     .then(listUI.onCreateSuccess)
     .catch(listUI.onCreateFailure)
+}
+
+const createNewItem = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  itemApi.createItem(data)
+    .then(itemUI.onCreateSuccess)
+    .catch(itemUI.onCreateFailure)
 }
 
 const editList = function (event) {
@@ -202,9 +205,15 @@ const addItemToList = function (event) {
   const itemID = $(event.target).attr('data-item')
   $('tr[data-item="' + itemID + '"]').removeClass('hidden')
   $('td[data-item="' + itemID + '"]').attr('data-content', 'target')
-  listApi.indexLists()
-    .then(listUI.onListNames)
-    .catch(listUI.onIndexFailure)
+  if (store.list) {
+    listApi.getList(store.list)
+      .then(listUI.onToList)
+      .catch(listUI.onIndexFailure)
+  } else {
+    listApi.indexLists()
+      .then(listUI.onListNames)
+      .catch(listUI.onIndexFailure)
+  }
 }
 
 const showQuantity = function (event) {
@@ -236,6 +245,23 @@ const searchItems = function (event) {
   }
 }
 
+const onIndexItems = function (event) {
+  event.preventDefault()
+  itemApi.indexItems()
+    .then(itemUI.onIndexSuccess)
+    .catch(itemUI.onIndexFailure)
+}
+
+const searchToList = function (event) {
+  store.list = $(event.target).closest('div').attr('data-id')
+  handlebars.searchItems()
+}
+
+const newToList = function (event) {
+  store.list = $(event.target).closest('div').attr('data-id')
+  handlebars.newItem()
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -252,12 +278,16 @@ const addHandlers = function () {
   $('#content').on('click', 'a[data-note]', toggleListGroupEdit)
   $('#content').on('click', 'button[data-listid]', editList)
   $('#content').on('submit', '#new-list-form', createNewList)
+  $('#content').on('submit', '#new-item-form', createNewItem)
   $('#content').on('click', 'button[data-note="edit-li"]', editListRow)
   $('#content').on('click', 'button[data-item]', addItemToList)
   $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
   $('#content').on('click', 'button[data-to]', appendItemToList)
   $('#content').on('click', 'button[data-search]', searchItems)
   $('#content').on('click', 'button[data-list].btn-info', toggleListActive)
+  $('#content').on('click', 'button[data-item-index]', onIndexItems)
+  $('#content').on('click', 'button[data-add-search]', searchToList)
+  $('#content').on('click', 'button[data-add-new]', newToList)
 }
 
 module.exports = {

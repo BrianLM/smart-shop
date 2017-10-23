@@ -3,16 +3,29 @@
   <h1>Create a New Item</h1>
   <table class="table table-hover table-responsive">
     <tr>
-      <th>Item Name</th>
-      <th>Unit of Measure</th>
-      <th>Quantity per Unit</th>
+      <th>
+        Item Name
+      </th>
+      <th>
+        Unit of Measure
+      </th>
+      <th>
+        Quantity per Unit
+      </th>
     </tr>
     <tr>
-      <td><input type="text" name="item[name]" placeholder="Item Name" ></td>
-      <td><input type="text" name="item[unit]" placeholder="Unit of Measure"></td>
-      <td><input type="text" name="item[unit_quantity]" placeholder="Item Name"></td>
+      <td>
+        <input type="text" name="item[name]" placeholder="Item Name" >
+      </td>
+      <td>
+        <input type="text" name="item[unit]" placeholder="Unit of Measure">
+      </td>
+      <td>
+        <input type="text" name="item[unit_quantity]" placeholder="Item Name">
+      </td>
     </tr>
   </table>
   <input class="btn-primary" type="submit" value="Submit &raquo;">
-  <button class="btn-default">Cancel</button>
+  <button data-item-index class="btn-default">Cancel
+  </button>
 </form>

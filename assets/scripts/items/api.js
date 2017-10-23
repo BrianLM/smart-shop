@@ -22,7 +22,19 @@ const onSearchItems = function (data) {
   })
 }
 
+const createItem = function (data) {
+  return $.ajax({
+    url: config.apiOrigin + '/items',
+    method: 'post',
+    data: data,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   indexItems,
-  onSearchItems
+  onSearchItems,
+  createItem
 }

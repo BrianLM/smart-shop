@@ -1,12 +1,13 @@
 const showIndexItemsTemplate = require('./templates/index-items.handlebars')
 const showIndexListTemplate = require('./templates/index-lists.handlebars')
-const showIndexPurchasesTemplate = require('./templates/index-purchases.handlebars')
 const showNewItemTemplate = require('./templates/new-item.handlebars')
 const showNewListTemplate = require('./templates/new-list.handlebars')
 const showSearchItemTemplate = require('./templates/search-items.handlebars')
 const showEditListTemplate = require('./templates/edit-list.handlebars')
 const showListPartialTemplate = require('./templates/list-partial.handlebars')
 const showSearchResultsTemplate = require('./templates/search-results.handlebars')
+
+const store = require('./store.js')
 
 const indexItems = function (data) {
   clearContent()
@@ -18,12 +19,6 @@ const indexLists = function (data) {
   clearContent()
   const showIndexListsHtml = showIndexListTemplate({lists: data})
   $('#content').append(showIndexListsHtml)
-}
-
-const indexPurchases = function (data) {
-  clearContent()
-  const showIndexPurchaseHtml = showIndexPurchasesTemplate(data)
-  $('#content').append(showIndexPurchaseHtml)
 }
 
 const newItem = function () {
@@ -40,7 +35,7 @@ const newList = function () {
 
 const searchItems = function (data) {
   clearContent()
-  const showSearchItemsHtml = showSearchItemTemplate(data)
+  const showSearchItemsHtml = showSearchItemTemplate({'list': store.list})
   $('#content').append(showSearchItemsHtml)
 }
 
@@ -52,6 +47,7 @@ const searchItemResults = function (data) {
 
 const editList = function (data) {
   clearContent()
+  store.list = null
   const showEditListHtml = showEditListTemplate({list: data})
   $('#content').append(showEditListHtml)
 }
@@ -68,7 +64,6 @@ const clearContent = function () {
 module.exports = {
   indexLists,
   indexItems,
-  indexPurchases,
   newItem,
   newList,
   editList,
