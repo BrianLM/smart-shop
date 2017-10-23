@@ -287,6 +287,7 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-item-index]', onIndexItems)
   $('#content').on('click', 'button[data-add-search]', searchToList)
   $('#content').on('click', 'button[data-add-new]', newToList)
+  $('#content').on('click', 'button[data-new-list]', function () { handlebars.newList() })
 }
 
 module.exports = {

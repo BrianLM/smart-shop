@@ -1,4 +1,4 @@
-<h3>Now showing only active lists.</h3>
+{{#if lists}}<h3>Now showing only active lists.</h3>
 <a href="#" data-show="active">Show all</a>
 {{#each lists as |list|}}
   <div class="container-fluid {{#if list.active}}{{else}}hidden{{/if}}" data-list="{{#if list.active}}true{{else}}false{{/if}}">
@@ -39,3 +39,7 @@
   </button>
 </div>
 {{/each}}
+{{else}}
+<h3>You have no lists.</h3>
+Create a new list? <button class="btn btn-success" data-new-list>New List</button>
+{{/if}}
