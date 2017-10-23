@@ -44,12 +44,7 @@ const signOutFailure = function (response, status, xhr) {
 }
 
 const clearModals = function () {
-  // $('input[name="credentials[email]"]').val('')
-  // $('input[name="credentials[password]"]').val('')
-  // $('input[name="passwords[old]"]').val('')
-  // $('input[name="passwords[new]"]').val('')
-  // $('input[name="credentials[password_confirmation]"]').val('')
-  $('input').val('')
+  $('input[name]').val('')
   $('#signInComment').text('')
   $('#signUpComment').text('')
 }
