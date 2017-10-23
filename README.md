@@ -1,6 +1,6 @@
 # The Application
 
-Shopping list organizer for making smarter, reusable lists
+Shopping list organizer for making smarter, reusable lists. It can be found here, https://brianlm.github.io/smart-shop/index.html.
 
 ## The tech
 
