@@ -1,17 +1,19 @@
 <form id="edit-item-form" data-id="{{item.id}}">
   <h1>Edit Item</h1>
   <table class="table table-hover table-responsive">
-    <tr>
-      <th>
-        Item Name
-      </th>
-      <th>
-        Unit of Measure
-      </th>
-      <th>
-        Quantity per Unit
-      </th>
-    </tr>
+    <thead>
+      <tr>
+        <th>
+          Item Name
+        </th>
+        <th>
+          Unit of Measure
+        </th>
+        <th>
+          Quantity per Unit
+        </th>
+      </tr>
+    </thead>
     <tr>
       <td>
         <input type="text" name="item[name]" placeholder="Item Name" value="{{item.name}}" >

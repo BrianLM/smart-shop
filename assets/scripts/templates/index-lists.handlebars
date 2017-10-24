@@ -4,20 +4,22 @@
   <div class="container-fluid {{#if list.active}}{{else}}hidden{{/if}}" data-list="{{#if list.active}}true{{else}}false{{/if}}">
   <table class="table table-responsive table-hover">
     <caption>List {{list.name}} Active   <input type="checkbox" {{#if list.active}}checked{{/if}} data-list="{{list.id}}">
-    <tr>
-      <th>
-        Item Name
-      </th>
-      <th>
-        Needed
-      </th>
-      <th>
-        Package
-      </th>
-      <th>
-        Purchased?
-      </th>
-    </tr>
+      <thead>
+        <tr>
+          <th>
+            Item Name
+          </th>
+          <th>
+            Needed
+          </th>
+          <th>
+            Package
+          </th>
+          <th>
+            Purchased?
+          </th>
+        </tr>
+      </thead>
     {{#each list.list_items as |listItem|}}
       <tr>
         <td>

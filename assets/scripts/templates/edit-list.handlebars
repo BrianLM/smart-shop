@@ -13,23 +13,25 @@
     <caption>
       List {{list.name}} Active   <input type="checkbox" {{#if list.active}}checked{{/if}} data-list="{{list.id}}">
     </caption>
-    <tr>
-      <th>
-        Item Name
-      </th>
-      <th>
-        Needed
-      </th>
-      <th>
-        Package
-      </th>
-      <th>
-        Purchased?
-      </th>
-      <th></th>
-      <th></th>
-    </tr>
-      {{#each list.list_items as |listItem|}}
+    <thead>
+      <tr>
+        <th>
+          Item Name
+        </th>
+        <th>
+          Needed
+        </th>
+        <th>
+          Package
+        </th>
+        <th>
+          Purchased?
+        </th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    {{#each list.list_items as |listItem|}}
       <tr data-listitem="{{listItem.id}}" data-mode="show">
         <td>
           {{listItem.item.name}}
@@ -52,7 +54,7 @@
           </button>
         </td>
       </tr>
-      {{/each}}
+    {{/each}}
   </table>
   <p>
     <button data-add-search class="btn-xs btn-primary">

@@ -1,15 +1,17 @@
 <table class="table table-hover table-responsive">
-  <tr>
-    <th>
-      Item Name
-    </th>
-    <th>
-      Unit of Measure
-    </th>
-    <th>
-      Quantity per unit
-    </th>
-  </tr>
+  <thead>
+    <tr>
+      <th>
+        Item Name
+      </th>
+      <th>
+        Unit of Measure
+      </th>
+      <th>
+        Quantity per unit
+      </th>
+    </tr>
+  </thead>
   {{#each items as |item|}}
     <tr data-row="{{item.id}}">
       <td>

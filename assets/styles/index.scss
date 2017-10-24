@@ -2,8 +2,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-
-.input-right {
-  font-weight: bold;
-  text-align: right;
-}
+@import 'colors';
+// @import 'breakpoints';
+// @import 'typography';
+@import 'theme';
