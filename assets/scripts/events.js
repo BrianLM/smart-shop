@@ -206,6 +206,7 @@ const editListRow = function (event) {
 const addItemToList = function (event) {
   event.preventDefault()
   const itemID = $(event.target).attr('data-item')
+  $('tr[data-itemhide]').addClass('hidden')
   $('tr[data-item="' + itemID + '"]').removeClass('hidden')
   $('td[data-item="' + itemID + '"]').attr('data-content', 'target')
   if (store.list) {
@@ -271,6 +272,22 @@ const deleteList = function (event) {
     .then(indexLists)
 }
 
+const showEditItem = function (event) {
+  const id = $(event.target).attr('data-edit-item')
+  itemApi.getItem(id)
+    .then(itemUI.onGetSuccess)
+    .catch(itemUI.onGetFailure)
+}
+
+const editItem = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  const id = $(event.target).attr('data-id')
+  itemApi.onUpdate(id, data)
+    .then(itemUI.onUpdateSuccess)
+    .catch(itemUI.onUpdateFailure)
+}
+
 const addHandlers = function () {
   $('#sign-out').on('click', signOutUser)
   $('#signup').on('submit', signUpUser)
@@ -288,6 +305,7 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-listid]', editList)
   $('#content').on('submit', '#new-list-form', createNewList)
   $('#content').on('submit', '#new-item-form', createNewItem)
+  $('#content').on('submit', '#edit-item-form', editItem)
   $('#content').on('click', 'button[data-note="edit-li"]', editListRow)
   $('#content').on('click', 'button[data-item]', addItemToList)
   $('#content').on('click', 'button[data-function="quantity"]', showQuantity)
@@ -299,6 +317,7 @@ const addHandlers = function () {
   $('#content').on('click', 'button[data-add-search]', searchToList)
   $('#content').on('click', 'button[data-add-new]', newToList)
   $('#content').on('click', 'button[data-new-list]', function () { handlebars.newList() })
+  $('#content').on('click', 'button[data-edit-item]', showEditItem)
 }
 
 module.exports = {

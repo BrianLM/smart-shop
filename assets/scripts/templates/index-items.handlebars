@@ -24,9 +24,10 @@
       </td>
       <td>
         <button title="Add to a list" data-item="{{item.id}}" class="btn-sm btn-warning">&#43;</button>
+        <button title="Edit item" data-edit-item="{{item.id}}" class="btn-sm btn-primary">Edit</button>
       </td>
     </tr>
-    <tr class="hidden" data-item="{{item.id}}"><td colspan="4" data-item="{{item.id}}"><td>
+    <tr class="hidden" data-itemhide data-item="{{item.id}}"><td colspan="4" data-item="{{item.id}}"><td>
     </tr>
   {{/each}}
 </table>

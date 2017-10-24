@@ -6,37 +6,38 @@ const showSearchItemTemplate = require('./templates/search-items.handlebars')
 const showEditListTemplate = require('./templates/edit-list.handlebars')
 const showListPartialTemplate = require('./templates/list-partial.handlebars')
 const showSearchResultsTemplate = require('./templates/search-results.handlebars')
+const showEditItemTemplate = require('./templates/edit-item.handlebars')
 
 const store = require('./store.js')
 
 const indexItems = function (data) {
-  clearContent()
   const showNewItemHtml = showIndexItemsTemplate({items: data})
-  $('#content').append(showNewItemHtml)
+  showContent(showNewItemHtml)
 }
 
 const indexLists = function (data) {
-  clearContent()
   const showIndexListsHtml = showIndexListTemplate({lists: data})
-  $('#content').append(showIndexListsHtml)
+  showContent(showIndexListsHtml)
 }
 
 const newItem = function () {
-  clearContent()
   const showNewItemHtml = showNewItemTemplate()
-  $('#content').append(showNewItemHtml)
+  showContent(showNewItemHtml)
 }
 
 const newList = function () {
-  clearContent()
   const showNewlistHtml = showNewListTemplate()
-  $('#content').append(showNewlistHtml)
+  showContent(showNewlistHtml)
 }
 
 const searchItems = function (data) {
-  clearContent()
   const showSearchItemsHtml = showSearchItemTemplate({'list': store.list})
-  $('#content').append(showSearchItemsHtml)
+  showContent(showSearchItemsHtml)
+}
+
+const editItem = function (data) {
+  const showEditItemHtml = showEditItemTemplate({'item': data})
+  showContent(showEditItemHtml)
 }
 
 const searchItemResults = function (data) {
@@ -46,19 +47,20 @@ const searchItemResults = function (data) {
 }
 
 const editList = function (data) {
-  clearContent()
   store.list = null
   const showEditListHtml = showEditListTemplate({list: data})
-  $('#content').append(showEditListHtml)
+  showContent(showEditListHtml)
 }
 
 const partialList = function (data) {
   const showListPartialHtml = showListPartialTemplate({lists: data})
+  $('td[data-content="target"]').empty()
   $('td[data-content="target"]').append(showListPartialHtml)
 }
 
-const clearContent = function () {
+const showContent = function (html) {
   $('#content').empty()
+  $('#content').append(html)
 }
 
 module.exports = {
@@ -69,5 +71,6 @@ module.exports = {
   editList,
   searchItems,
   partialList,
-  searchItemResults
+  searchItemResults,
+  editItem
 }

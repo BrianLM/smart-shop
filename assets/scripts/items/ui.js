@@ -17,6 +17,18 @@ const onSearchSuccess = function (response, status, xhr) {
 const onSearchFailure = function (response, status, xhr) {
 }
 
+const onGetSuccess = function (response, status, xhr) {
+  handlebars.editItem(response.item)
+}
+const onGetFailure = function (response, status, xhr) {
+}
+
+const onUpdateSuccess = function (response, status, xhr) {
+  $('#nav-index-items').trigger('click')
+}
+const onUpdateFailure = function (response, status, xhr) {
+}
+
 const onCreateSuccess = function (response, status, xhr) {
   if (store.list) {
     const data = {'list_item': { 'list_id': store.list, 'item_id': response.item.id, 'purchased': false, 'quantity': 1 }}
@@ -38,6 +50,10 @@ module.exports = {
   onIndexFailure,
   onSearchSuccess,
   onSearchFailure,
+  onGetSuccess,
+  onGetFailure,
+  onUpdateSuccess,
+  onUpdateFailure,
   onCreateSuccess,
   onCreateFailure
 }

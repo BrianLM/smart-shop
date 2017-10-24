@@ -33,8 +33,31 @@ const createItem = function (data) {
   })
 }
 
+const onUpdate = function (id, data) {
+  return $.ajax({
+    url: config.apiOrigin + '/items/' + id,
+    method: 'patch',
+    data: data,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const getItem = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/items/' + id,
+    method: 'get',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   indexItems,
   onSearchItems,
-  createItem
+  createItem,
+  onUpdate,
+  getItem
 }

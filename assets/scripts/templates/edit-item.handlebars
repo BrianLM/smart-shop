@@ -1,0 +1,31 @@
+<form id="edit-item-form" data-id="{{item.id}}">
+  <h1>Edit Item</h1>
+  <table class="table table-hover table-responsive">
+    <tr>
+      <th>
+        Item Name
+      </th>
+      <th>
+        Unit of Measure
+      </th>
+      <th>
+        Quantity per Unit
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" name="item[name]" placeholder="Item Name" value="{{item.name}}" >
+      </td>
+      <td>
+        <input type="text" name="item[unit]" placeholder="Unit of Measure" value="{{item.unit}}">
+      </td>
+      <td>
+        <input type="text" name="item[unit_quantity]" placeholder="Item Name" value="{{item.unit_quantity}}">
+      </td>
+    </tr>
+  </table>
+  <input class="btn-primary" type="submit" value="Change &raquo;">
+  <button data-item-index class="btn-default">Cancel
+  </button>
+</form>
+<div id="new-item-response"></div>
