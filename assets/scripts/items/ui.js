@@ -18,10 +18,16 @@ const onSearchFailure = function (response, status, xhr) {
 }
 
 const onCreateSuccess = function (response, status, xhr) {
-  const data = {'list_item': { 'list_id': store.list, 'item_id': response.item.id, 'purchased': false, 'quantity': 1 }}
-  liApi.onAddItemToList(data)
-    .then(liUI.onCreateSuccess)
-    .catch(liUI.onCreateFailure)
+  if (store.list) {
+    const data = {'list_item': { 'list_id': store.list, 'item_id': response.item.id, 'purchased': false, 'quantity': 1 }}
+    liApi.onAddItemToList(data)
+      .then(liUI.onCreateSuccess)
+      .catch(liUI.onCreateFailure)
+  } else {
+    $('#new-item-response').empty()
+    const html = '</p>Your new item, <strong>' + response.item.name + '</strong>, has been saved.</p>'
+    $('#new-item-response').append(html)
+  }
 }
 
 const onCreateFailure = function (response, status, xhr) {
