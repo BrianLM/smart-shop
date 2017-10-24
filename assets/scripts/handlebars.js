@@ -11,6 +11,9 @@ const showEditItemTemplate = require('./templates/edit-item.handlebars')
 const store = require('./store.js')
 
 const indexItems = function (data) {
+  for (const key in data) {
+    data[key]['owner'] = data[key]['user_id'] === store.user.id
+  }
   const showNewItemHtml = showIndexItemsTemplate({items: data})
   showContent(showNewItemHtml)
 }

@@ -1,4 +1,5 @@
 <table class="table table-hover table-responsive">
+  {{#if lists}}
   {{#each lists as |list|}}
     <tr data-row="{{list.id}}" {{#if list.active}}{{else}}class="hidden"{{/if}} >
       <td>
@@ -17,4 +18,11 @@
       </td>
     </tr>
   {{/each}}
+  {{else}}
+    <tr>
+      <td>
+        You have no lists. <button class="btn btn-xs btn-success" data-new-list >Make a new list &raquo;</button>
+      </td>
+    </tr>
+    {{/if}}
 </table>

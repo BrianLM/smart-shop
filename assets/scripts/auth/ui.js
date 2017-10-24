@@ -37,6 +37,7 @@ const changePasswordFailure = function (response, status, xhr) {
 
 const signOutSuccess = function (response, status, xhr) {
   store.user = null
+  $('#content').empty()
   toggleUserDisplay(false)
 }
 
