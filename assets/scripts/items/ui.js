@@ -37,6 +37,8 @@ const onCreateSuccess = function (response, status, xhr) {
       .catch(liUI.onCreateFailure)
   } else {
     $('#new-item-response').empty()
+    $('#new-item-form input[type="text"]').val('')
+    $('#new-item-form input[type="number"]').val('')
     const html = '</p>Your new item, <strong>' + response.item.name + '</strong>, has been saved.</p>'
     $('#new-item-response').append(html)
   }
