@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Smart Shop - List Assistant</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid">
+      <!-- Define Navbar -->
+      <div class="container-fluid">
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#siteNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Smart-Shop</a>
+            </div>
+            <div class="collapse navbar-collapse" id="siteNavbar">
+              <ul class="nav navbar-nav">
+                <li data-user="user" class="hidden">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Lists <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" data-view="new-list" id="nav-new-list">New List</a></li>
+                    <li><a href="#" data-view="index-lists" id="nav-index-lists">Show Lists</a></li>
+                  </ul>
+                </li>
+                <li data-user="user" class="hidden">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Items <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" data-view="new-item" id="nav-new-item">New Items</a></li>
+                    <li><a href="#" data-view="search-items" id="nav-get-item">Search items</a></li>
+                    <li><a href="#" data-view="index-items" id="nav-index-items">List all items</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li data-user="no-user"><a href="#signin-modal" data-toggle="modal" ><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                <li data-user="no-user"><a href="#login-modal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li data-user="user" class="hidden">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="current-user">Current user</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#change-password-modal" data-toggle="modal">Change Password</a></li>
+                    <li><a href="#" id="sign-out">Sign Out</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div id="content"></div>
+      <!-- Define Modals  -->
+
+      <!-- Sign Up Modal -->
+      <div id="signin-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <form id="signup" data-modal="signin-modal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Sign Up!</h4>
+            </div>
+            <div class="modal-body">
+              <p>Your email is your user name.</p>
+              <input name="credentials[email]" type="email" placeholder="Your email address" required>
+              <input name="credentials[password]" type="password" placeholder="A simple password" required>
+              <input name="credentials[password_confirmation]" type="password" placeholder="The same password" required>
+              <section id="signUpComment"></section>
+           </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-default" value="Submit &raquo;">
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign-In modal -->
+      <div id="login-modal" class="modal fade" data-backdrop="false" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <form id="signin" data-modal="login-modal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Sign In!</h4>
+            </div>
+            <div class="modal-body">
+              <p>Welcome back. Remember, your email is your user name.</p>
+              <input name="credentials[email]" type="email" placeholder="Your email address" required>
+              <input name="credentials[password]" type="password" placeholder="A simple password" required>
+              <section id="signInComment"></section>
+           </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-default" value="Submit &raquo;">
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Change Password Modal -->
+      <div id="change-password-modal" class="modal fade" data-backdrop="false" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <form id="change-password" data-modal="change-password-modal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Change your password</h4>
+            </div>
+            <div class="modal-body">
+              <p>Change your password?</p>
+              <input name="passwords[old]" type="password" placeholder="Your old password" required>
+              <input name="passwords[new]" type="password" placeholder="Your new password" required>
+              <br/>
+              <section id="changeComment"></section>
+           </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-default" value="Submit &raquo;">
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+
+    </body>
+</html>
